@@ -45,7 +45,7 @@ GLoc = {
 
         // Do magic with the location
         g.startPos = position;
-        g.searchQuery = `http://api.openweathermap.org/data/2.5/weather?lat=${g.startPos.coords.latitude}&lon=${g.startPos.coords.longitude}&appid=${apikey}`;
+        g.searchQuery = `https://api.openweathermap.org/data/2.5/weather?lat=${g.startPos.coords.latitude}&lon=${g.startPos.coords.longitude}&appid=${apikey}`;
 
         $.getJSON(g.searchQuery, function(data) {
             WeatherInfo.setWeatherData(data);
@@ -134,7 +134,7 @@ WeatherInfo = {
 
     getWeatherData: function(searchQuery) {
         if (w.searchLocationInput.val() !== '') {
-            w.searchQuery = `http://api.openweathermap.org/data/2.5/weather?q=${w.searchLocationInput.val()}&appid=${apikey}`;
+            w.searchQuery = `https://api.openweathermap.org/data/2.5/weather?q=${w.searchLocationInput.val()}&appid=${apikey}`;
             $.getJSON(w.searchQuery, function(data) {
                 WeatherInfo.setWeatherData(data);
             });
