@@ -44,12 +44,16 @@ class GLoc {
   }
 
   bindUIActions() {
-    this.settings.geoButton.addEventListener("click", () =>
-      this.getGeoLocation()
-    );
-    this.settings.closeButton.addEventListener("click", () =>
-      this.hideGeoErrorMessageBanner()
-    );
+    if (this.settings.geoButton) {
+      this.settings.geoButton.addEventListener("click", () =>
+        this.getGeoLocation()
+      );
+    }
+    if (this.settings.closeButton) {
+      this.settings.closeButton.addEventListener("click", () =>
+        this.hideGeoErrorMessageBanner()
+      );
+    }
   }
 
   getGeoLocation() {
@@ -60,11 +64,15 @@ class GLoc {
   }
 
   showGeoErrorMessageBanner() {
-    this.settings.geoErrorMessage.classList.toggle("hide");
+    if (this.settings.geoErrorMessage) {
+      this.settings.geoErrorMessage.classList.toggle("hide");
+    }
   }
 
   hideGeoErrorMessageBanner() {
-    this.settings.geoErrorMessage.classList.add("hide");
+    if (this.settings.geoErrorMessage) {
+      this.settings.geoErrorMessage.classList.add("hide");
+    }
   }
 
   async geoSuccess(position: GeolocationPosition) {
@@ -154,37 +162,53 @@ class WeatherInfo {
 
   init() {
     this.bindUIActions();
-    this.settings.searchLocationInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        this.settings.searchLocationButton.click();
-      }
-    });
+    if (this.settings.searchLocationInput) {
+      this.settings.searchLocationInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          this.settings.searchLocationButton.click();
+        }
+      });
+    }
   }
 
   bindUIActions() {
-    this.settings.searchLocationButton.addEventListener("click", () =>
-      this.getWeatherData()
-    );
-    this.settings.celsiusButton.addEventListener("click", () =>
-      this.changeTempUnit(TempUnit.Celsius)
-    );
-    this.settings.fahrenheitButton.addEventListener("click", () =>
-      this.changeTempUnit(TempUnit.Fahrenheit)
-    );
-    this.settings.closeAttribution.addEventListener("click", () =>
-      this.closeAttributionModal()
-    );
-    this.settings.openAttribution.addEventListener("click", () =>
-      this.openAttributionModal()
-    );
+    if (this.settings.searchLocationButton) {
+      this.settings.searchLocationButton.addEventListener("click", () =>
+        this.getWeatherData()
+      );
+    }
+    if (this.settings.celsiusButton) {
+      this.settings.celsiusButton.addEventListener("click", () =>
+        this.changeTempUnit(TempUnit.Celsius)
+      );
+    }
+    if (this.settings.fahrenheitButton) {
+      this.settings.fahrenheitButton.addEventListener("click", () =>
+        this.changeTempUnit(TempUnit.Fahrenheit)
+      );
+    }
+    if (this.settings.closeAttribution) {
+      this.settings.closeAttribution.addEventListener("click", () =>
+        this.closeAttributionModal()
+      );
+    }
+    if (this.settings.openAttribution) {
+      this.settings.openAttribution.addEventListener("click", () =>
+        this.openAttributionModal()
+      );
+    }
   }
 
   closeAttributionModal() {
-    this.settings.attributionModal.classList.add("hide");
+    if (this.settings.attributionModal) {
+      this.settings.attributionModal.classList.add("hide");
+    }
   }
 
   openAttributionModal() {
-    this.settings.attributionModal.classList.remove("hide");
+    if (this.settings.attributionModal) {
+      this.settings.attributionModal.classList.remove("hide");
+    }
   }
 
   async getWeatherData() {
@@ -202,11 +226,25 @@ class WeatherInfo {
 
   setWeatherData(data: any) {
     GLoc.prototype.hideGeoErrorMessageBanner();
-    document.getElementById("front-page-description")!.classList.add("hide");
-    this.settings.weather.classList.remove("hide");
-    this.settings.location.textContent = `${data.name}, ${data.sys.country}`;
-    this.settings.humidity.textContent = data.main.humidity;
-    this.settings.weatherDescription.textContent = data.weather[0].description;
+    const frontPageDescription = document.getElementById(
+      "front-page-description"
+    );
+    if (frontPageDescription) {
+      frontPageDescription.classList.add("hide");
+    }
+    if (this.settings.weather) {
+      this.settings.weather.classList.remove("hide");
+    }
+    if (this.settings.location) {
+      this.settings.location.textContent = `${data.name}, ${data.sys.country}`;
+    }
+    if (this.settings.humidity) {
+      this.settings.humidity.textContent = data.main.humidity;
+    }
+    if (this.settings.weatherDescription) {
+      this.settings.weatherDescription.textContent =
+        data.weather[0].description;
+    }
     this.settings.tempNumber = data.main.temp;
     this.settings.windSpeed = data.wind.speed;
     this.settings.windDegree = data.wind.deg;
@@ -222,41 +260,65 @@ class WeatherInfo {
     const degree = this.settings.windDegree;
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
     const index = Math.round(degree / 45) % 8;
-    this.settings.windDirection.textContent = directions[index];
+    if (this.settings.windDirection) {
+      this.settings.windDirection.textContent = directions[index];
+    }
   }
 
   changeTempUnit(unit: TempUnit) {
     const newTemp = this.settings.tempNumber - 273.15;
     if (unit === TempUnit.Fahrenheit) {
-      this.settings.temperature.innerHTML = Math.round(
-        (9 / 5) * newTemp + 32
-      ).toString();
-      this.settings.celsius.classList.remove("checked");
-      this.settings.fahrenheit.classList.add("checked");
-      this.settings.temperature.classList.remove("celsius-degree");
-      this.settings.temperature.classList.add("fahrenheit-degree");
+      if (this.settings.temperature) {
+        this.settings.temperature.innerHTML = Math.round(
+          (9 / 5) * newTemp + 32
+        ).toString();
+      }
+      if (this.settings.celsius) {
+        this.settings.celsius.classList.remove("checked");
+      }
+      if (this.settings.fahrenheit) {
+        this.settings.fahrenheit.classList.add("checked");
+      }
+      if (this.settings.temperature) {
+        this.settings.temperature.classList.remove("celsius-degree");
+        this.settings.temperature.classList.add("fahrenheit-degree");
+      }
       this.changeSpeedUnit("m");
     } else if (unit === TempUnit.Celsius) {
-      this.settings.celsius.classList.add("checked");
-      this.settings.fahrenheit.classList.remove("checked");
-      this.settings.temperature.classList.add("celsius-degree");
-      this.settings.temperature.classList.remove("fahrenheit-degree");
-      this.settings.temperature.innerHTML = Math.round(newTemp).toString();
+      if (this.settings.celsius) {
+        this.settings.celsius.classList.add("checked");
+      }
+      if (this.settings.fahrenheit) {
+        this.settings.fahrenheit.classList.remove("checked");
+      }
+      if (this.settings.temperature) {
+        this.settings.temperature.classList.add("celsius-degree");
+        this.settings.temperature.classList.remove("fahrenheit-degree");
+        this.settings.temperature.innerHTML = Math.round(newTemp).toString();
+      }
       this.changeSpeedUnit("km");
     }
   }
 
   changeSpeedUnit(unit: string) {
     if (unit === "km") {
-      this.settings.wind.textContent = Math.round(
-        this.settings.windSpeed * 3.6
-      ).toString();
-      this.settings.speedUnit.textContent = "km/h";
+      if (this.settings.wind) {
+        this.settings.wind.textContent = Math.round(
+          this.settings.windSpeed * 3.6
+        ).toString();
+      }
+      if (this.settings.speedUnit) {
+        this.settings.speedUnit.textContent = "km/h";
+      }
     } else if (unit === "m") {
-      this.settings.wind.textContent = Math.round(
-        this.settings.windSpeed * 2.23694185194
-      ).toString();
-      this.settings.speedUnit.textContent = "mph";
+      if (this.settings.wind) {
+        this.settings.wind.textContent = Math.round(
+          this.settings.windSpeed * 2.23694185194
+        ).toString();
+      }
+      if (this.settings.speedUnit) {
+        this.settings.speedUnit.textContent = "mph";
+      }
     }
   }
 
