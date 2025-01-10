@@ -151,7 +151,7 @@ class WeatherInfo {
       windSpeed: 0,
       windDirection: document.getElementById("wind-direction")!,
       windDegree: 0,
-      dayOrNight: "",
+      dayOrNight: "daytime",
       closeAttribution: document.getElementById("close-attribution")!,
       openAttribution: document.getElementById("noun-project")!,
       attributionModal: document.getElementById("attribution-links")!,
@@ -225,7 +225,8 @@ class WeatherInfo {
   }
 
   setWeatherData(data: any) {
-    GLoc.prototype.hideGeoErrorMessageBanner();
+    const gLoc = new GLoc(); // Create an instance to access methods
+    gLoc.hideGeoErrorMessageBanner();
     const frontPageDescription = document.getElementById(
       "front-page-description"
     );
@@ -323,11 +324,8 @@ class WeatherInfo {
   }
 
   getDayOrNight(time: number, sunrise: number, sunset: number) {
-    if (time >= sunrise && time < sunset) {
-      this.settings.dayOrNight = "daytime";
-    } else {
-      this.settings.dayOrNight = "nighttime";
-    }
+    this.settings.dayOrNight =
+      time >= sunrise && time < sunset ? "daytime" : "nighttime";
   }
 }
 
@@ -430,8 +428,8 @@ class CanvasBackground {
 
   chooseBackground(condition: string = WeatherCondition.Default) {
     this.settings.bgChoice = condition;
-    this.settings.weatherBackground.className =
-      WeatherInfo.prototype.settings.dayOrNight;
+    const weatherInfo = new WeatherInfo(); // Create an instance to access settings
+    this.settings.weatherBackground.className = weatherInfo.settings.dayOrNight;
 
     switch (condition) {
       case WeatherCondition.Thunderstorm:
