@@ -110,6 +110,7 @@ interface WeatherSettings {
   celsius: HTMLElement;
   wind: HTMLElement;
   searchLocationInput: HTMLInputElement;
+  searchCountryInput: HTMLInputElement;
   searchLocationButton: HTMLElement;
   celsiusButton: HTMLElement;
   fahrenheitButton: HTMLElement;
@@ -143,6 +144,9 @@ class WeatherInfo {
       searchLocationInput: document.getElementById(
         "search-location-input"
       ) as HTMLInputElement,
+      searchCountryInput: document.getElementById(
+        "search-country-input"
+      ) as HTMLInputElement,
       searchLocationButton: document.getElementById("search-location-button")!,
       celsiusButton: document.getElementById("celsius")!,
       fahrenheitButton: document.getElementById("fahrenheit")!,
@@ -164,6 +168,13 @@ class WeatherInfo {
     this.bindUIActions();
     if (this.settings.searchLocationInput) {
       this.settings.searchLocationInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          this.settings.searchLocationButton.click();
+        }
+      });
+    }
+    if (this.settings.searchCountryInput) {
+      this.settings.searchCountryInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
           this.settings.searchLocationButton.click();
         }
@@ -212,8 +223,11 @@ class WeatherInfo {
   }
 
   async getWeatherData() {
-    if (this.settings.searchLocationInput.value !== "") {
-      this.settings.searchQuery = `https://api.openweathermap.org/data/2.5/weather?q=${this.settings.searchLocationInput.value}&appid=${apikey}`;
+    if (
+      this.settings.searchLocationInput.value !== "" &&
+      this.settings.searchCountryInput.value !== ""
+    ) {
+      this.settings.searchQuery = `https://api.openweathermap.org/data/2.5/weather?q=${this.settings.searchLocationInput.value},${this.settings.searchCountryInput.value}&appid=${apikey}`;
       try {
         const response = await fetch(this.settings.searchQuery);
         const data = await response.json();
