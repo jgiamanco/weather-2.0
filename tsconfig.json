@@ -9,5 +9,5 @@
     "outDir": "./dist",
     "rootDir": "./"
   },
-  "include": ["weather.ts"]
+  "include": ["weather.ts"] // Ensure this path is correct
 }
