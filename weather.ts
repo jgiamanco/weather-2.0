@@ -267,8 +267,14 @@ class WeatherInfo {
     this.changeTempUnit(TempUnit.Fahrenheit);
     const time = Date.now() / 1000;
     this.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
+    this.clearCanvasBackground();
     const canvasBackground = new CanvasBackground();
     canvasBackground.chooseBackground(data.weather[0].main);
+  }
+
+  clearCanvasBackground() {
+    const canvasBackground = new CanvasBackground();
+    canvasBackground.clearAllCanvases();
   }
 
   getWeatherDirection() {
@@ -535,36 +541,51 @@ class CanvasBackground {
     cancelAnimationFrame(this.settings.requestCloud);
     cancelAnimationFrame(this.settings.requestWeather);
     cancelAnimationFrame(this.settings.requestTime);
-    this.settings.weatherCTX.clearRect(
-      0,
-      0,
-      this.settings.weatherCanvas.width,
-      this.settings.weatherCanvas.height
-    );
-    this.settings.timeCTX.clearRect(
-      0,
-      0,
-      this.settings.timeCanvas.width,
-      this.settings.timeCanvas.height
-    );
-    this.settings.rainCTX.clearRect(
-      0,
-      0,
-      this.settings.rainCanvas.width,
-      this.settings.rainCanvas.height
-    );
-    this.settings.cloudCTX.clearRect(
-      0,
-      0,
-      this.settings.cloudCanvas.width,
-      this.settings.cloudCanvas.height
-    );
-    this.settings.lightningCTX.clearRect(
-      0,
-      0,
-      this.settings.lightningCanvas.width,
-      this.settings.lightningCanvas.height
-    );
+
+    if (this.settings.weatherCTX) {
+      this.settings.weatherCTX.clearRect(
+        0,
+        0,
+        this.settings.weatherCanvas.width,
+        this.settings.weatherCanvas.height
+      );
+    }
+
+    if (this.settings.timeCTX) {
+      this.settings.timeCTX.clearRect(
+        0,
+        0,
+        this.settings.timeCanvas.width,
+        this.settings.timeCanvas.height
+      );
+    }
+
+    if (this.settings.rainCTX) {
+      this.settings.rainCTX.clearRect(
+        0,
+        0,
+        this.settings.rainCanvas.width,
+        this.settings.rainCanvas.height
+      );
+    }
+
+    if (this.settings.cloudCTX) {
+      this.settings.cloudCTX.clearRect(
+        0,
+        0,
+        this.settings.cloudCanvas.width,
+        this.settings.cloudCanvas.height
+      );
+    }
+
+    if (this.settings.lightningCTX) {
+      this.settings.lightningCTX.clearRect(
+        0,
+        0,
+        this.settings.lightningCanvas.width,
+        this.settings.lightningCanvas.height
+      );
+    }
   }
 
   animateRain(condition: string) {
