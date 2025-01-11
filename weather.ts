@@ -537,56 +537,30 @@ class CanvasBackground {
   }
 
   clearAllCanvases() {
+    // Clear all intervals and animation frames
     clearInterval(this.settings.refreshIntervalID);
     cancelAnimationFrame(this.settings.requestRain);
     cancelAnimationFrame(this.settings.requestCloud);
     cancelAnimationFrame(this.settings.requestWeather);
     cancelAnimationFrame(this.settings.requestTime);
 
-    if (this.settings.weatherCTX) {
-      this.settings.weatherCTX.clearRect(
-        0,
-        0,
-        this.settings.weatherCanvas.width,
-        this.settings.weatherCanvas.height
-      );
-    }
+    // Clear all canvas contexts
+    const canvases = [
+      { ctx: this.settings.weatherCTX, canvas: this.settings.weatherCanvas },
+      { ctx: this.settings.timeCTX, canvas: this.settings.timeCanvas },
+      { ctx: this.settings.rainCTX, canvas: this.settings.rainCanvas },
+      { ctx: this.settings.cloudCTX, canvas: this.settings.cloudCanvas },
+      {
+        ctx: this.settings.lightningCTX,
+        canvas: this.settings.lightningCanvas,
+      },
+    ];
 
-    if (this.settings.timeCTX) {
-      this.settings.timeCTX.clearRect(
-        0,
-        0,
-        this.settings.timeCanvas.width,
-        this.settings.timeCanvas.height
-      );
-    }
-
-    if (this.settings.rainCTX) {
-      this.settings.rainCTX.clearRect(
-        0,
-        0,
-        this.settings.rainCanvas.width,
-        this.settings.rainCanvas.height
-      );
-    }
-
-    if (this.settings.cloudCTX) {
-      this.settings.cloudCTX.clearRect(
-        0,
-        0,
-        this.settings.cloudCanvas.width,
-        this.settings.cloudCanvas.height
-      );
-    }
-
-    if (this.settings.lightningCTX) {
-      this.settings.lightningCTX.clearRect(
-        0,
-        0,
-        this.settings.lightningCanvas.width,
-        this.settings.lightningCanvas.height
-      );
-    }
+    canvases.forEach(({ ctx, canvas }) => {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
   }
 
   animateRain(condition: string) {
