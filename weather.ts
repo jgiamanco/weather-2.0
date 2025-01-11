@@ -14,7 +14,7 @@ enum WeatherCondition {
   Clouds = "Clouds",
   Clear = "Clear",
   Extreme = "Extreme",
-  Default = "default-weather",
+  Default = "clearsky",
 }
 
 interface Settings {
@@ -511,7 +511,7 @@ class CanvasBackground {
         break;
       default:
         this.clearAllCanvases();
-        this.settings.weatherBackground.classList.add("default-weather");
+        this.settings.weatherBackground.classList.add("clearsky");
         this.getRandomBackground();
         break;
     }
