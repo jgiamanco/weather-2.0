@@ -539,10 +539,22 @@ class CanvasBackground {
   clearAllCanvases() {
     // Clear all intervals and animation frames
     clearInterval(this.settings.refreshIntervalID);
-    cancelAnimationFrame(this.settings.requestRain);
-    cancelAnimationFrame(this.settings.requestCloud);
-    cancelAnimationFrame(this.settings.requestWeather);
-    cancelAnimationFrame(this.settings.requestTime);
+    if (this.settings.requestRain) {
+      cancelAnimationFrame(this.settings.requestRain);
+      this.settings.requestRain = 0;
+    }
+    if (this.settings.requestCloud) {
+      cancelAnimationFrame(this.settings.requestCloud);
+      this.settings.requestCloud = 0;
+    }
+    if (this.settings.requestWeather) {
+      cancelAnimationFrame(this.settings.requestWeather);
+      this.settings.requestWeather = 0;
+    }
+    if (this.settings.requestTime) {
+      cancelAnimationFrame(this.settings.requestTime);
+      this.settings.requestTime = 0;
+    }
 
     // Clear all canvas contexts
     const canvases = [
