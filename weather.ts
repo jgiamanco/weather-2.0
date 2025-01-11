@@ -240,6 +240,8 @@ class WeatherInfo {
 
   setWeatherData(data: any) {
     const gLoc = new GLoc(); // Create an instance to access methods
+    const canvasBackground = new CanvasBackground();
+    this.clearCanvasBackground();
     gLoc.hideGeoErrorMessageBanner();
     const frontPageDescription = document.getElementById(
       "front-page-description"
@@ -267,8 +269,6 @@ class WeatherInfo {
     this.changeTempUnit(TempUnit.Fahrenheit);
     const time = Date.now() / 1000;
     this.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
-    this.clearCanvasBackground();
-    const canvasBackground = new CanvasBackground();
     canvasBackground.chooseBackground(data.weather[0].main);
   }
 
@@ -528,6 +528,7 @@ class CanvasBackground {
       this.animateSnow,
       this.animateRain,
       this.animateClouds,
+      this.animateLightning,
     ];
     const randomAnimation = Math.floor(
       Math.random() * possibleAnimations.length
