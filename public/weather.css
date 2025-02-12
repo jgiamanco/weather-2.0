@@ -1,394 +1,337 @@
-*, *:before, *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+/* Global Styles */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:focus,
+button:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.hide {
+  display: none;
+}
+
+/* Containers */
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -100px; /* equal to footer height */
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+
+.site-footer,
+.page-wrap:after {
+  height: 100px;
+}
+
+.site-footer {
+  background: #fff;
+  color: #555;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.site-footer-section {
+  padding: 0.5rem;
+}
+
+@media only screen and (min-width: 341px) {
+  .page-wrap {
+    margin-bottom: -64px; /* equal to footer height */
   }
-  
-  .hide {
-      display:none;
+  .site-footer,
+  .page-wrap:after {
+    height: 64px;
   }
-  
-  .geo-error-message, .attribution-links {
-      max-width:400px;
-      -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
-      box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
-      background:#fff;
-      padding: 25px;
-      margin:6rem auto;
-      position:relative;
-      z-index: 10;
+}
+
+@media only screen and (min-width: 861px) {
+  .site-footer-section {
+    display: inline-block;
+    width: 50%;
+    padding: 1.5rem;
   }
-  
-  .close-error, .close-attribution {
-      position:absolute;
-      top:0;
-      right:0;
-      border-radius:0;
-      border: 1px solid #ccc;
-      background-color: #fff;
+  .author {
+    text-align: right;
   }
-  
+}
+
+/* Search Bar */
+.search-bar {
+  background: #fff;
+  padding: 1rem;
+  color: #555;
+  text-align: center;
+}
+
+.search-location-text {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.search-text {
+  margin-bottom: 0.5rem;
+}
+
+.search-location-button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.search-button {
+  border: none;
+  background-color: #ddd;
+  color: #555;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.search-location-button {
+  border-right: 1px solid #fff;
+}
+
+.geo-button {
+  border-left: 1px solid #fff;
+}
+
+.search-location-input {
+  color: #000;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+@media only screen and (min-width: 520px) {
   .search-bar {
-      background:#fff;
-      height:129px;
-      color:#555;
-      padding-top:5px;
-  }
-  
-  .search-location-text {
-      font-size: 16px;
-      font-weight:300;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .search-text {
-      text-align:center;
-      margin-bottom:10px;
-  }
-
-  .search-location-button-group {
-    display: flex;
-}
-  
-  .search-button {
-      border:none;
-      width:50%;
-      background-color: #ddd;
-      color:#555;
-      height:50px;
-      font-size:16px;
-      display:inline-block;
-  }
-  
-  .search-location-button {
-      border-right: 1px solid #fff;
-  }
-  
-  .geo-button {
-      border-left: 1px solid #fff;
-  }
-  
-  .search-location-input {
-      color: #000;
-      padding:7px;
-  }
-  
-  @media only screen and (min-width:401px) {
-      .search-bar {
-          height:107px;
-      }
-  
-  }
-  
-  
-  @media only screen and (min-width:520px) {
-  
-      .search-bar {
-          padding-top:0;
-          height:50px;
-      }
-      .search-text {
-          text-align:left;
-          float:left;
-          margin-top:5px;
-          margin-bottom:0;
-          padding-left:10px;
-      }
-  
-      .search-location-button-group {
-          display: flex;
-          float:right;
-      }
-  
-      .search-button {
-          width:50px;
-      }
-  
-  }
-  
-  
-  @media only screen and (min-width:753px) {
-  
-      .search-bar {
-          height: 64px;
-          padding-top:0;
-      }
-  
-      .search-location-text{
-          font-size:24px;
-          position:relative;
-          top:5px;
-      }
-  
-      .search-text {
-          text-align:left;
-          display:inline;
-          margin:0;
-      } 
-  
-      .search-button {
-          width:64px;
-          float:left;
-          height:64px;
-      }
-  }
-  
-  
-  body {
-      margin:0;
-      padding:0;
-      font-family: 'Open Sans', sans-serif;
-  }
-  
-  
-  
-  .fallback-background {
-      background-image:url(images/weather.png);
-  }
-  
-  #rain-canvas, #weather-canvas, #cloud-canvas, #time-canvas, #lightning-canvas {
-      position:absolute;
-      z-index: -1;
-  }
-  
-  
-  /* Canvas Background Classes */
-  
-  .thunderstorm {
-      background-color: #34495E;
-  }
-  .drizzle, .rain {
-      background-color: #2080B6;
-  }
-  .snow {
-      background-color: #959B9F;
-  }
-  .atmosphere {
-      background-color: #5E668F;
-  }
-  .clouds {
-      background-color: #3498DB;
-  }
-  .clearsky, .default-weather {
-      background-color: #6FC2D4;
-  }
-  .extreme-weather {
-      background-color: #C0392B;
-  }
-  
-  
-  .thunderstorm.nighttime {
-      background-color: #1B2631;
-  }
-  .drizzle.nighttime, .rain.nighttime {
-      background-color: #0E3A53;
-  }
-  .snow.nighttime {
-      background-color: #333537;
-  }
-  .atmosphere.nighttime {
-      background-color: #32364A;
-  }
-  .clouds.nighttime {
-      background-color: #164362;
-  }
-  .clearsky.nighttime {
-      background-color: #222;
-  }
-  .extreme-weather.nighttime {
-      background-color: #491611;
-  }
-  
-  .nighttime {
-      background-image: url(https://img.wallpapersafari.com/desktop/1920/1080/74/93/84eLTH.jpg);
-  }
-  
-  
-  h1, h2, h3, h4, h5, h6 {
-      font-weight: 300;
-  }
-  
-  
-  .weather, .front-page-description {
-      text-align:center;
-      color: #fff;
-      font-size:20px;
-      font-weight:300;
-  }
-  
-  .nighttime .weather {
-      text-shadow: 1px 1px 4px #000;
-      font-weight:400;
-  }
-  
-  .nighttime .checked {
-      color: rgba(255,255,255,.5);
-  }
-  
-  .weather-info {
-      list-style-type:none;
-      padding:0;
-      text-align:center;
-      font-size:16px;
-  }
-  
-  .weather-item {
-      text-align:center;
-      display:inline-block;
-      background-repeat: no-repeat;
-      background-size: contain;
-  }
-  
-  
-  .middle {
-      margin: 10px 0;
-  }
-  
-  @media only all and (min-width:500px) {
-      .middle {
-          position: absolute;
-          top: 50%;
-          right: 0;
-          left: 0;
-          -webkit-transform: translateY(-50%);
-          -moz-transform: translateY(-50%);
-          -ms-transform: translateY(-50%);
-          -o-transform: translateY(-50%);
-          transform: translateY(-50%);
-      }
-  }
-  
-  
-  
-  
-  
-  .temp-change {
-      clear:both;
-  }
-  
-  .weather-container {
-      position:relative;
-  }
-  
-  .weather-description {
-      display: inline-block;
-      text-transform: capitalize;
-  }
-  
-  .weather-description, .weather-box {
-      padding: 10px 0;
-  }
-  
-  .temp-change-button {
-      background: none;
-      border: none;
-      padding: 0 10px;
-      font-weight: 600;
-      font-size: 14px;
-  }
-  
-  .celsius {
-      border-right: 2px solid #fff;
-  }
-  
-  .checked {
-      color: rgba(0,0,0,.5);
-  }
-  
-  .humidity {
-      background-image: url(https://vectr.com/jgiamanco/a1GfnMDfti.svg?width=640&height=640&select=a1GfnMDftipage0);
-      padding-left: 25px;
-  }
-  .wind {
-      background-image: url(https://vectr.com/jgiamanco/a1oLeangBc.svg?width=640&height=640&select=a1oLeangBcpage0);
-      margin-left: 20px;
-      padding-left: 25px;
-  }
-  
-  .temperature {
-      font-size:8rem;
-      line-height:1;
-      margin-left: 35px;
-  }
-  
-  @media only all and (min-width:320px) {
-      .temperature  {
-          font-size: 12rem;
-      }
-  }
-  
-  .temperature:after {
-      content: '\B0 C';
-      font-size: 40px;
-      line-height: 2.2;
-      vertical-align: top;
-      margin-left:-6px;
-  }
-  
-  .fahrenheit-degree:after {
-      content: '\B0 F';
-  }
-  
-  .celsius-degree:after {
-      content: '\B0 C';
-  }
-  
-  a {
-      color: #333;
-  }
-  
-  
-  
-  /* Sticky Footer */
-  
-  * {
     margin: 0;
   }
-  html, body {
-    height: 100%;
+  .search-location-button-group {
+    justify-content: flex-end;
   }
-  .page-wrap {
-    min-height: 100%;
-    /* equal to footer height */
-    margin-bottom: -100px; 
+  .search-button {
+    width: auto;
+    padding: 0.5rem 1rem;
   }
-  .page-wrap:after {
-    content: "";
-    display: block;
+}
+
+/* Weather Info */
+.weather,
+.front-page-description {
+  text-align: center;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 1rem 0;
+}
+
+.weather-info {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.weather-item {
+  display: inline-block;
+  padding-left: 1.5rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.humidity {
+  background-image: url(https://vectr.com/jgiamanco/a1GfnMDfti.svg?width=640&height=640&select=a1GfnMDftipage0);
+}
+
+.wind {
+  background-image: url(https://vectr.com/jgiamanco/a1oLeangBc.svg?width=640&height=640&select=a1oLeangBcpage0);
+  margin-left: 1.25rem;
+}
+
+.temperature {
+  font-size: 4rem;
+  line-height: 1;
+  margin-left: 2rem;
+}
+
+.temperature:after {
+  content: "\B0 C";
+  font-size: 2rem;
+  line-height: 2.2;
+  vertical-align: top;
+  margin-left: -0.375rem;
+}
+
+.fahrenheit-degree:after {
+  content: "\B0 F";
+}
+
+.celsius-degree:after {
+  content: "\B0 C";
+}
+
+.temp-change {
+  clear: both;
+}
+
+.temp-change-button {
+  background: none;
+  border: none;
+  padding: 0 0.625rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.celsius {
+  border-right: 2px solid #fff;
+}
+
+.checked {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Error and Attribution Messages */
+.geo-error-message,
+.attribution-links {
+  max-width: 25rem;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  background: #fff;
+  padding: 1.5rem;
+  margin: 6rem auto;
+  position: relative;
+  z-index: 10;
+}
+
+.close-error,
+.close-attribution {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Canvas Background */
+#rain-canvas,
+#weather-canvas,
+#cloud-canvas,
+#time-canvas,
+#lightning-canvas {
+  position: absolute;
+  z-index: -1;
+}
+
+.thunderstorm {
+  background-color: #34495e;
+}
+
+.drizzle,
+.rain {
+  background-color: #2080b6;
+}
+
+.snow {
+  background-color: #959b9f;
+}
+
+.atmosphere {
+  background-color: #5e668f;
+}
+
+.clouds {
+  background-color: #3498db;
+}
+
+.clearsky,
+.default-weather {
+  background-color: #6fc2d4;
+}
+
+.extreme-weather {
+  background-color: #c0392b;
+}
+
+.thunderstorm.nighttime {
+  background-color: #1b2631;
+}
+
+.drizzle.nighttime,
+.rain.nighttime {
+  background-color: #0e3a53;
+}
+
+.snow.nighttime {
+  background-color: #333537;
+}
+
+.atmosphere.nighttime {
+  background-color: #32364a;
+}
+
+.clouds.nighttime {
+  background-color: #164362;
+}
+
+.clearsky.nighttime {
+  background-color: #222;
+}
+
+.extreme-weather.nighttime {
+  background-color: #491611;
+}
+
+.nighttime {
+  background-image: url(https://img.wallpapersafari.com/desktop/1920/1080/74/93/84eLTH.jpg);
+}
+
+.nighttime .weather {
+  text-shadow: 1px 1px 4px #000;
+  font-weight: 400;
+}
+
+.nighttime .checked {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Middle Alignment */
+.middle {
+  margin: 1rem 0;
+}
+
+@media only screen and (min-width: 500px) {
+  .middle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    transform: translateY(-50%);
   }
-  .site-footer, .page-wrap:after {
-    height: 100px; 
-  }
-  .site-footer {
-    background: #fff;
-    color: #555;
-    font-size: 14px;
-  }
-  
-  .site-footer-section {
-      padding: 5px 5px 0 5px;
-      font-size: 14px;
-  }
-  
-  
-  @media only all and (min-width:341px) {
-      .page-wrap {
-        /* equal to footer height */
-        margin-bottom: -64px; 
-      }
-      .site-footer, .page-wrap:after {
-        height: 64px; 
-      }
-  }
-  
-  
-  @media only all and (min-width:861px) {
-  
-      .site-footer-section {
-          display:inline-block;
-          width:50%;
-          padding: 25px 25px 0 25px;
-      }
-  
-      .author {text-align:right;}
-  
-  }
+}
