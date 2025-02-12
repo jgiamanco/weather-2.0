@@ -1,5 +1,18 @@
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
+const fs = require("fs");
+
+// Load environment variables from .env file
+const env = fs.existsSync(path.resolve(__dirname, ".env"))
+  ? require("dotenv").config({ path: path.resolve(__dirname, ".env") }).parsed
+  : {};
+
+// Create an object to hold the environment variables
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   mode: "production", // Set the mode to 'development' or 'production'
@@ -24,5 +37,6 @@ module.exports = {
     new Dotenv({
       path: path.resolve(__dirname, ".env"), // Load .env file
     }),
+    new webpack.DefinePlugin(envKeys), // Replace process.env variables
   ],
 };
