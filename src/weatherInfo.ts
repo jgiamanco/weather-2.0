@@ -148,9 +148,11 @@ export class WeatherInfo {
     this.getWeatherDirection();
     this.changeTempUnit(TempUnit.Fahrenheit);
     const time = Date.now() / 1000;
-    console.log(time, data.sys.sunrise, data.sys.sunset);
     this.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
-    this.canvasBackground.chooseBackground(data.weather[0].main);
+    this.canvasBackground.chooseBackground(
+      data.weather[0].main,
+      this.settings.dayOrNight
+    );
   }
 
   clearCanvasBackground() {
@@ -226,6 +228,10 @@ export class WeatherInfo {
   getDayOrNight(time: number, sunrise: number, sunset: number) {
     this.settings.dayOrNight =
       time >= sunrise && time < sunset ? "daytime" : "nighttime";
+  }
+
+  getDayOrNightSetting(): string {
+    return this.settings.dayOrNight;
   }
 
   showErrorMessage(message: string) {

@@ -55,7 +55,6 @@ export class CanvasBackground {
 
   init() {
     this.setupCanvas();
-    this.chooseBackground();
   }
 
   setupCanvas() {
@@ -84,12 +83,14 @@ export class CanvasBackground {
     this.animateTime();
   }
 
-  chooseBackground(condition: string = WeatherCondition.Default) {
+  chooseBackground(
+    condition: string = WeatherCondition.Default,
+    dayOrNight: string
+  ) {
     this.resetToClearSky(); // Reset to clear sky before starting new animations
 
     this.settings.bgChoice = condition;
-    const weatherInfo = { settings: { dayOrNight: this.settings.dayOrNight } }; // Mocked instance for demonstration
-    this.settings.weatherBackground.className = weatherInfo.settings.dayOrNight;
+    this.settings.weatherBackground.className = dayOrNight;
 
     switch (condition) {
       case WeatherCondition.Thunderstorm:
