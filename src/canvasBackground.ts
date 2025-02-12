@@ -80,7 +80,7 @@ export class CanvasBackground {
 
   resetToClearSky() {
     this.clearAllCanvases();
-    this.settings.weatherBackground.className = "clearsky";
+    this.settings.weatherBackground.className = "default-weather";
     this.animateTime();
   }
 
