@@ -148,6 +148,7 @@ export class WeatherInfo {
     this.getWeatherDirection();
     this.changeTempUnit(TempUnit.Fahrenheit);
     const time = Date.now() / 1000;
+    console.log(time, data.sys.sunrise, data.sys.sunset);
     this.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
     this.canvasBackground.chooseBackground(data.weather[0].main);
   }
