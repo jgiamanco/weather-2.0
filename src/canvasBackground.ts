@@ -88,7 +88,7 @@ export class CanvasBackground {
     this.resetToClearSky(); // Reset to clear sky before starting new animations
 
     this.settings.bgChoice = condition;
-    const weatherInfo = { settings: { dayOrNight: "daytime" } }; // Mocked instance for demonstration
+    const weatherInfo = { settings: { dayOrNight: this.settings.dayOrNight } }; // Mocked instance for demonstration
     this.settings.weatherBackground.className = weatherInfo.settings.dayOrNight;
 
     switch (condition) {
