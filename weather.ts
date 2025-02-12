@@ -474,8 +474,13 @@ class CanvasBackground {
     this.settings.lightningCanvas.height = innerHeight;
   }
 
+  resetToClearSky() {
+    this.clearAllCanvases();
+    this.settings.weatherBackground.className = "clearsky";
+  }
+
   chooseBackground(condition: string = WeatherCondition.Default) {
-    this.clearAllCanvases(); // Clear all previous animations
+    this.resetToClearSky(); // Reset to clear sky before starting new animations
 
     this.settings.bgChoice = condition;
     const weatherInfo = { settings: { dayOrNight: "daytime" } }; // Mocked instance for demonstration
