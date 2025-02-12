@@ -459,13 +459,14 @@ class CanvasBackground {
   }
 
   chooseBackground(condition: string = WeatherCondition.Default) {
+    this.clearAllCanvases(); // Clear all previous animations
+
     this.settings.bgChoice = condition;
     const weatherInfo = { settings: { dayOrNight: "daytime" } }; // Mocked instance for demonstration
     this.settings.weatherBackground.className = weatherInfo.settings.dayOrNight;
 
     switch (condition) {
       case WeatherCondition.Thunderstorm:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("thunderstorm");
         this.animateRain("rain");
         this.animateClouds();
@@ -473,50 +474,42 @@ class CanvasBackground {
         this.animateTime();
         break;
       case WeatherCondition.Drizzle:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("drizzle");
         this.animateRain("drizzle");
         this.animateClouds();
         this.animateTime();
         break;
       case WeatherCondition.Rain:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("rain");
         this.animateRain("rain");
         this.animateClouds();
         this.animateTime();
         break;
       case WeatherCondition.Snow:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("snow");
         this.animateSnow();
         this.animateTime();
         break;
       case WeatherCondition.Atmosphere:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("atmosphere");
         this.animateAtmosphere();
         this.animateTime();
         break;
       case WeatherCondition.Clouds:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("clouds");
         this.animateClouds();
         this.animateTime();
         break;
       case WeatherCondition.Clear:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("clearsky");
         this.animateTime();
         break;
       case WeatherCondition.Extreme:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("extreme-weather");
         this.animateExtreme();
         this.animateTime();
         break;
       default:
-        this.clearAllCanvases();
         this.settings.weatherBackground.classList.add("clearsky");
         this.getRandomBackground();
         break;
