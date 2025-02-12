@@ -48,7 +48,7 @@ export class CanvasBackground {
       requestWeather: 0,
       requestTime: 0,
       refreshIntervalID: 0,
-      dayOrNight: "daytime",
+      dayOrNight: "",
     };
     this.init();
   }
