@@ -20,5 +20,9 @@ module.exports = {
       },
     ],
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv({
+      path: path.resolve(__dirname, ".env"), // Load .env file
+    }),
+  ],
 };
