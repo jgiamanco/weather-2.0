@@ -27,8 +27,10 @@ interface Settings {
 
 class GLoc {
   settings: Settings;
+  canvasBackground: CanvasBackground;
 
-  constructor() {
+  constructor(canvasBackground: CanvasBackground) {
+    this.canvasBackground = canvasBackground;
     this.settings = {
       geoButton: document.getElementById("geo-button")!,
       geoErrorMessage: document.getElementById("geo-error-message")!,
@@ -82,11 +84,15 @@ class GLoc {
 
     try {
       const response = await fetch(this.settings.searchQuery);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
       const data = await response.json();
-      const weatherInfo = new WeatherInfo();
+      const weatherInfo = new WeatherInfo(this.canvasBackground);
       weatherInfo.setWeatherData(data);
     } catch (error) {
       console.error("Error fetching weather data:", error);
+      this.showGeoErrorMessageBanner();
     }
   }
 
@@ -128,8 +134,10 @@ interface WeatherSettings {
 
 class WeatherInfo {
   settings: WeatherSettings;
+  canvasBackground: CanvasBackground;
 
-  constructor() {
+  constructor(canvasBackground: CanvasBackground) {
+    this.canvasBackground = canvasBackground;
     this.settings = {
       tempIcon: document.getElementById("temp-icon")!,
       weather: document.getElementById("weather")!,
@@ -230,19 +238,20 @@ class WeatherInfo {
       this.settings.searchQuery = `https://api.openweathermap.org/data/2.5/weather?q=${this.settings.searchLocationInput.value},${this.settings.searchCountryInput.value}&appid=${apikey}`;
       try {
         const response = await fetch(this.settings.searchQuery);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
         const data = await response.json();
         this.setWeatherData(data);
       } catch (error) {
         console.error("Error fetching weather data:", error);
+        this.showErrorMessage("Error fetching weather data. Please try again.");
       }
     }
   }
 
   setWeatherData(data: any) {
-    const gLoc = new GLoc(); // Create an instance to access methods
-    const canvasBackground = new CanvasBackground();
     this.clearCanvasBackground();
-    gLoc.hideGeoErrorMessageBanner();
     const frontPageDescription = document.getElementById(
       "front-page-description"
     );
@@ -269,12 +278,11 @@ class WeatherInfo {
     this.changeTempUnit(TempUnit.Fahrenheit);
     const time = Date.now() / 1000;
     this.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
-    canvasBackground.chooseBackground(data.weather[0].main);
+    this.canvasBackground.chooseBackground(data.weather[0].main);
   }
 
   clearCanvasBackground() {
-    const canvasBackground = new CanvasBackground();
-    canvasBackground.clearAllCanvases();
+    this.canvasBackground.clearAllCanvases();
   }
 
   getWeatherDirection() {
@@ -346,6 +354,14 @@ class WeatherInfo {
   getDayOrNight(time: number, sunrise: number, sunset: number) {
     this.settings.dayOrNight =
       time >= sunrise && time < sunset ? "daytime" : "nighttime";
+  }
+
+  showErrorMessage(message: string) {
+    const errorMessageElement = document.getElementById("error-message");
+    if (errorMessageElement) {
+      errorMessageElement.textContent = message;
+      errorMessageElement.classList.remove("hide");
+    }
   }
 }
 
@@ -533,19 +549,19 @@ class CanvasBackground {
     // Clear all intervals and animation frames
     clearInterval(this.settings.refreshIntervalID);
     if (this.settings.requestRain) {
-      cancelAnimationFrame(this.settings.requestRain);
+      window.cancelAnimationFrame(this.settings.requestRain);
       this.settings.requestRain = 0;
     }
     if (this.settings.requestCloud) {
-      cancelAnimationFrame(this.settings.requestCloud);
+      window.cancelAnimationFrame(this.settings.requestCloud);
       this.settings.requestCloud = 0;
     }
     if (this.settings.requestWeather) {
-      cancelAnimationFrame(this.settings.requestWeather);
+      window.cancelAnimationFrame(this.settings.requestWeather);
       this.settings.requestWeather = 0;
     }
     if (this.settings.requestTime) {
-      cancelAnimationFrame(this.settings.requestTime);
+      window.cancelAnimationFrame(this.settings.requestTime);
       this.settings.requestTime = 0;
     }
 
