@@ -35,7 +35,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv({
-      path: path.resolve(__dirname, ".env"), // Load .env file
+      systemvars: true,
     }),
     new webpack.DefinePlugin(envKeys), // Replace process.env variables
   ],
