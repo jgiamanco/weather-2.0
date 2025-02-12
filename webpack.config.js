@@ -6,7 +6,7 @@ module.exports = {
   entry: "./src/main.ts", // Ensure this path is correct
   output: {
     filename: "weather.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "public"), // Change 'dist' to 'public'
   },
   resolve: {
     extensions: [".ts", ".js"],
