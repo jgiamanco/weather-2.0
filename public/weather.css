@@ -122,7 +122,7 @@ button:focus {
   margin: 0.5rem 0;
 }
 
-@media only screen and (min-width: 520px) {
+@media only screen and (min-width: 720px) {
   .search-bar {
     text-align: left;
     display: flex;
@@ -138,6 +138,15 @@ button:focus {
   .search-button {
     width: auto;
     padding: 0.5rem 1rem;
+  }
+  .search-bar input {
+    height: 32px;
+  }
+  .search-bar input.search-location-input {
+    width: 25%;
+  }
+  .search-bar input.search-country-input {
+    width: 20%;
   }
 }
 
