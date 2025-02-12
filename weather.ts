@@ -477,6 +477,7 @@ class CanvasBackground {
   resetToClearSky() {
     this.clearAllCanvases();
     this.settings.weatherBackground.className = "clearsky";
+    this.animateTime();
   }
 
   chooseBackground(condition: string = WeatherCondition.Default) {
@@ -532,7 +533,7 @@ class CanvasBackground {
         break;
       default:
         this.settings.weatherBackground.classList.add("clearsky");
-        this.getRandomBackground();
+        this.animateTime();
         break;
     }
   }
