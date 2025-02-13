@@ -12,5 +12,5 @@ export enum WeatherCondition {
   Clouds = "Clouds",
   Clear = "Clear",
   Extreme = "Extreme",
-  Default = "clearsky",
+  Default = "Clear",
 }
