@@ -84,7 +84,7 @@ div#front-page-description h1 {
 }
 
 .search-location-text {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 800;
 }
 
@@ -149,6 +149,10 @@ div#front-page-description h1 {
   .search-button {
     width: auto;
     padding: 0.5rem 1rem;
+  }
+  .search-location-text {
+    font-size: 1rem;
+    font-weight: 800;
   }
 }
 
