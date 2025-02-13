@@ -69,6 +69,7 @@ export class GLoc {
       console.log(data);
       const weatherInfo = new WeatherInfo(this.canvasBackground);
       weatherInfo.setWeatherData(data);
+      weatherInfo.handleImage(data.weather[0].icon);
     } catch (error) {
       console.error("Error fetching weather data:", error);
       this.showGeoErrorMessageBanner();
