@@ -46,6 +46,9 @@ export class WeatherInfo {
 
   init() {
     this.bindUIActions();
+  }
+
+  bindUIActions() {
     if (
       this.settings.searchLocationInput.value !== "" &&
       this.settings.searchCountryInput.value !== ""
@@ -64,9 +67,6 @@ export class WeatherInfo {
         this.getWeatherData()
       );
     }
-  }
-
-  bindUIActions() {
     if (this.settings.celsiusButton) {
       this.settings.celsiusButton.addEventListener("click", () =>
         this.changeTempUnit(TempUnit.Celsius)
