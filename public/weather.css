@@ -158,7 +158,8 @@ button:focus {
   color: #fff;
   background-color: rgb(0, 0, 25, 0.35);
   max-width: 400px;
-  min-height: 450px;
+  min-height: 100%;
+  padding: 0 0 3rem 0;
   font-size: 1.25rem;
   border-radius: 35px;
   font-weight: 300;
@@ -342,5 +343,5 @@ button:focus {
 
 /* Middle Alignment */
 .middle {
-  margin: 75px auto 0;
+  margin: 25px auto 0;
 }
