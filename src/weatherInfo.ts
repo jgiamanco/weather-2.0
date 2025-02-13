@@ -36,7 +36,7 @@ export class WeatherInfo {
       windSpeed: 0,
       windDirection: document.getElementById("wind-direction")!,
       windDegree: 0,
-      dayOrNight: this.getDayOrNightSetting(),
+      dayOrNight: "",
       closeAttribution: document.getElementById("close-attribution")!,
       openAttribution: document.getElementById("noun-project")!,
       attributionModal: document.getElementById("attribution-links")!,
@@ -294,10 +294,6 @@ export class WeatherInfo {
   getDayOrNight(time: number, sunrise: number, sunset: number) {
     this.settings.dayOrNight =
       time >= sunrise && time < sunset ? "daytime" : "nighttime";
-  }
-
-  getDayOrNightSetting(): string {
-    return this.settings.dayOrNight;
   }
 
   showErrorMessage(message: string) {
