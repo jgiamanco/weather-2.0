@@ -63,5 +63,4 @@ export interface CanvasSettings {
   requestWeather: number;
   requestTime: number;
   refreshIntervalID: number;
-  dayOrNight: string;
 }

@@ -36,7 +36,7 @@ export class WeatherInfo {
       windSpeed: 0,
       windDirection: document.getElementById("wind-direction")!,
       windDegree: 0,
-      dayOrNight: "daytime",
+      dayOrNight: this.getDayOrNightSetting(),
       closeAttribution: document.getElementById("close-attribution")!,
       openAttribution: document.getElementById("noun-project")!,
       attributionModal: document.getElementById("attribution-links")!,
@@ -123,17 +123,17 @@ export class WeatherInfo {
     }
   }
 
-  resetToClearSky() {
+  resetToClearSky(time: string) {
     this.canvasBackground.clearAllCanvases();
     this.settings.weatherBackground.className = "default-weather";
-    this.canvasBackground.animateTime();
+    this.canvasBackground.animateTime(time);
   }
 
   chooseBackground(
     condition: string = WeatherCondition.Default,
     dayOrNight: string
   ) {
-    this.resetToClearSky(); // Reset to clear sky before starting new animations
+    this.resetToClearSky(dayOrNight); // Reset to clear sky before starting new animations
 
     this.settings.bgChoice = condition;
     this.settings.weatherBackground.className = dayOrNight;
@@ -144,48 +144,48 @@ export class WeatherInfo {
         this.canvasBackground.animateRain("rain");
         this.canvasBackground.animateClouds();
         this.canvasBackground.animateLightning();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Drizzle:
         this.settings.weatherBackground.classList.add("drizzle");
         this.canvasBackground.animateRain("drizzle");
         this.canvasBackground.animateClouds();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Rain:
         this.settings.weatherBackground.classList.add("rain");
         this.canvasBackground.animateRain("rain");
         this.canvasBackground.animateClouds();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Snow:
         this.settings.weatherBackground.classList.add("snow");
         this.canvasBackground.animateSnow();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Atmosphere:
         this.settings.weatherBackground.classList.add("atmosphere");
         this.canvasBackground.animateAtmosphere();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Clouds:
         this.settings.weatherBackground.classList.add("clouds");
         this.canvasBackground.animateClouds();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Clear:
         this.settings.weatherBackground.classList.add("clearsky");
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       case WeatherCondition.Extreme:
         this.settings.weatherBackground.classList.add("extreme-weather");
         this.canvasBackground.animateExtreme();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
       default:
         this.settings.weatherBackground.classList.add("clearsky");
         this.canvasBackground.getRandomBackground();
-        this.canvasBackground.animateTime();
+        this.canvasBackground.animateTime(dayOrNight);
         break;
     }
   }
