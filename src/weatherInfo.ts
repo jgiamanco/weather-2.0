@@ -136,7 +136,7 @@ export class WeatherInfo {
     this.resetToClearSky(dayOrNight); // Reset to clear sky before starting new animations
 
     this.settings.weatherBackground.className = dayOrNight;
-
+    console.log(condition);
     switch (condition) {
       case WeatherCondition.Thunderstorm:
         this.settings.weatherBackground.classList.add("thunderstorm");
