@@ -28,20 +28,14 @@ button:focus {
   display: none;
 }
 
-/* Containers */
-.page-wrap {
-  min-height: 100%;
-  margin-bottom: -100px; /* equal to footer height */
+div#front-page-description {
+  background: none;
 }
 
-.page-wrap:after {
-  content: "";
-  display: block;
-}
-
-.site-footer,
-.page-wrap:after {
-  height: 100px;
+div#front-page-description h1 {
+  font-size: 1.25em;
+  padding-top: 1rem;
+  margin: 0.67em 0;
 }
 
 .site-footer {
