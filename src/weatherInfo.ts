@@ -49,44 +49,31 @@ export class WeatherInfo {
   }
 
   bindUIActions() {
-    if (
-      this.settings.searchLocationInput.value !== "" &&
-      this.settings.searchCountryInput.value !== ""
-    ) {
-      this.settings.searchLocationInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          this.settings.searchLocationButton.click();
-        }
-      });
-      this.settings.searchCountryInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          this.settings.searchLocationButton.click();
-        }
-      });
-      this.settings.searchLocationButton.addEventListener("click", () =>
-        this.getWeatherData()
-      );
-    }
-    if (this.settings.celsiusButton) {
-      this.settings.celsiusButton.addEventListener("click", () =>
-        this.changeTempUnit(TempUnit.Celsius)
-      );
-    }
-    if (this.settings.fahrenheitButton) {
-      this.settings.fahrenheitButton.addEventListener("click", () =>
-        this.changeTempUnit(TempUnit.Fahrenheit)
-      );
-    }
-    if (this.settings.closeAttribution) {
-      this.settings.closeAttribution.addEventListener("click", () =>
-        this.closeAttributionModal()
-      );
-    }
-    if (this.settings.openAttribution) {
-      this.settings.openAttribution.addEventListener("click", () =>
-        this.openAttributionModal()
-      );
-    }
+    this.settings.searchLocationInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        this.settings.searchLocationButton.click();
+      }
+    });
+    this.settings.searchCountryInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        this.settings.searchLocationButton.click();
+      }
+    });
+    this.settings.searchLocationButton.addEventListener("click", () =>
+      this.getWeatherData()
+    );
+    this.settings.celsiusButton.addEventListener("click", () =>
+      this.changeTempUnit(TempUnit.Celsius)
+    );
+    this.settings.fahrenheitButton.addEventListener("click", () =>
+      this.changeTempUnit(TempUnit.Fahrenheit)
+    );
+    this.settings.closeAttribution.addEventListener("click", () =>
+      this.closeAttributionModal()
+    );
+    this.settings.openAttribution.addEventListener("click", () =>
+      this.openAttributionModal()
+    );
   }
 
   closeAttributionModal() {
