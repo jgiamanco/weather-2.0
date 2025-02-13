@@ -377,10 +377,7 @@ export class CanvasBackground {
         setTimeout(flashOff, 100);
       };
 
-      this.settings.refreshIntervalID = setInterval(
-        flash,
-        5000
-      ) as unknown as number;
+      this.settings.refreshIntervalID = window.setInterval(flash, 5000);
     };
 
     thunderDraw();
