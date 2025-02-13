@@ -182,8 +182,8 @@ export class WeatherInfo {
         this.canvasBackground.animateTime(dayOrNight);
         break;
       default:
-        this.settings.weatherBackground.classList.add("clearsky");
-        this.canvasBackground.getRandomBackground();
+        this.settings.weatherBackground.classList.add("atmosphere");
+        this.canvasBackground.animateAtmosphere();
         this.canvasBackground.animateTime(dayOrNight);
         break;
     }
