@@ -198,7 +198,11 @@ export class WeatherInfo {
     this.settings.windSpeed = data.wind.speed;
     this.settings.windDegree = data.wind.deg;
     this.getWeatherDirection();
-    this.changeTempUnit(TempUnit.Fahrenheit);
+    if (data.sys.country.toLowerCase() == "us") {
+      this.changeTempUnit(TempUnit.Fahrenheit);
+    } else {
+      this.changeTempUnit(TempUnit.Celsius);
+    }
     const time = Date.now() / 1000;
     this.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
     this.chooseBackground(data.weather[0].main, this.settings.dayOrNight);
