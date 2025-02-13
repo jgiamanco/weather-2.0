@@ -7,6 +7,7 @@ export interface Settings {
 }
 
 export interface WeatherSettings {
+  weatherBackground: HTMLElement;
   tempIcon: HTMLElement;
   weather: HTMLElement;
   weatherInfo: HTMLElement;
@@ -23,6 +24,7 @@ export interface WeatherSettings {
   celsiusButton: HTMLElement;
   fahrenheitButton: HTMLElement;
   humidity: HTMLElement;
+  bgChoice: string;
   speedUnit: HTMLElement;
   windSpeed: number;
   windDirection: HTMLElement;
@@ -35,7 +37,6 @@ export interface WeatherSettings {
 }
 
 export interface CanvasSettings {
-  weatherBackground: HTMLElement;
   weatherCanvas: HTMLCanvasElement;
   weatherCTX: CanvasRenderingContext2D;
   rainCanvas: HTMLCanvasElement;
@@ -46,7 +47,6 @@ export interface CanvasSettings {
   timeCTX: CanvasRenderingContext2D;
   lightningCanvas: HTMLCanvasElement;
   lightningCTX: CanvasRenderingContext2D;
-  bgChoice: string;
   iconColor: {
     defaultWeather: string;
     thunderstorm: string;
