@@ -115,6 +115,7 @@ div#front-page-description h1 {
 
 .search-location-button {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
+  margin-right: 0.25rem;
 }
 
 .geo-button {
