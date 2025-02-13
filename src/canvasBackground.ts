@@ -51,6 +51,7 @@ export class CanvasBackground {
 
   init() {
     this.setupCanvas();
+    this.getRandomBackground();
   }
 
   setupCanvas() {
