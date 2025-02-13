@@ -46,24 +46,23 @@ export class WeatherInfo {
 
   init() {
     this.bindUIActions();
-    if (this.settings.searchLocationInput) {
+  }
+
+  bindUIActions() {
+    if (
+      this.settings.searchLocationInput.value !== "" &&
+      this.settings.searchCountryInput.value !== ""
+    ) {
       this.settings.searchLocationInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
           this.settings.searchLocationButton.click();
         }
       });
-    }
-    if (this.settings.searchCountryInput) {
       this.settings.searchCountryInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
           this.settings.searchLocationButton.click();
         }
       });
-    }
-  }
-
-  bindUIActions() {
-    if (this.settings.searchLocationButton) {
       this.settings.searchLocationButton.addEventListener("click", () =>
         this.getWeatherData()
       );
