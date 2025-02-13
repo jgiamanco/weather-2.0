@@ -170,6 +170,11 @@ button:focus {
   background-size: contain;
 }
 
+.weather-icon {
+  max-height: 100%;
+  margin-bottom: -2rem;
+}
+
 .humidity {
   background-image: url(https://vectr.com/jgiamanco/a1GfnMDfti.svg?width=640&height=640&select=a1GfnMDftipage0);
 }
