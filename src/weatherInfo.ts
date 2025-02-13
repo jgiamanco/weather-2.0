@@ -315,7 +315,7 @@ export class WeatherInfo {
           const a = data[i + 3];
 
           // Define your background removal logic here, e.g., using a color threshold or alpha value
-          if (r > 230 && g > 230 && b > 230) {
+          if (r == 230 && g == 230 && b == 230) {
             // Example: If the color is close to white, make it transparent
             data[i + 3] = 0; // Set alpha to 0 (transparent)
           }
