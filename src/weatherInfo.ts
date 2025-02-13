@@ -18,7 +18,6 @@ export class WeatherInfo {
       weatherDescription: document.getElementById("weather-description")!,
       temperature: document.getElementById("temperature")!,
       tempNumber: 0,
-      bgChoice: "",
       fahrenheit: document.getElementById("fahrenheit")!,
       celsius: document.getElementById("celsius")!,
       wind: document.getElementById("wind")!,
@@ -136,7 +135,6 @@ export class WeatherInfo {
   ) {
     this.resetToClearSky(dayOrNight); // Reset to clear sky before starting new animations
 
-    this.settings.bgChoice = condition;
     this.settings.weatherBackground.className = dayOrNight;
 
     switch (condition) {

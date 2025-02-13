@@ -24,7 +24,6 @@ export interface WeatherSettings {
   celsiusButton: HTMLElement;
   fahrenheitButton: HTMLElement;
   humidity: HTMLElement;
-  bgChoice: string;
   speedUnit: HTMLElement;
   windSpeed: number;
   windDirection: HTMLElement;
