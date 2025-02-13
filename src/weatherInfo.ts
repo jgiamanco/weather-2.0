@@ -102,6 +102,7 @@ export class WeatherInfo {
         const data = await response.json();
         console.log(data);
         this.setWeatherData(data);
+        this.handleImage(data.weather[0].icon);
       } catch (error) {
         console.error("Error fetching weather data:", error);
         this.showErrorMessage("Error fetching weather data. Please try again.");
@@ -279,6 +280,71 @@ export class WeatherInfo {
   getDayOrNight(time: number, sunrise: number, sunset: number) {
     this.settings.dayOrNight =
       time >= sunrise && time < sunset ? "daytime" : "nighttime";
+  }
+
+  async handleImage(imageName: string): Promise<void> {
+    try {
+      const response = await fetch(
+        `https://openweathermap.org/img/wn/${imageName}@4x.png`
+      );
+      if (!response.ok) {
+        throw new Error("Image was not found");
+      }
+      const blob = await response.blob();
+      const image = new Image();
+      const url = URL.createObjectURL(blob);
+      image.src = url;
+
+      await new Promise((resolve) => {
+        image.onload = resolve;
+      });
+
+      URL.revokeObjectURL(url);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = image.width;
+      canvas.height = image.height;
+      const ctx = canvas.getContext("2d");
+      ctx?.drawImage(image, 0, 0);
+
+      const imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData?.data;
+
+      if (data) {
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const a = data[i + 3];
+
+          // Define your background removal logic here, e.g., using a color threshold or alpha value
+          if (r > 200 && g > 200 && b > 200) {
+            // Example: If the color is close to white, make it transparent
+            data[i + 3] = 0; // Set alpha to 0 (transparent)
+          }
+        }
+      }
+
+      ctx?.putImageData(imageData!, 0, 0);
+      const newBlob = await new Promise<Blob | null>((resolve) => {
+        canvas.toBlob(resolve, "image/png");
+      });
+
+      if (newBlob) {
+        const newUrl = URL.createObjectURL(newBlob);
+        const weatherIcon = document.getElementById(
+          "weather-icon"
+        ) as HTMLImageElement;
+        if (weatherIcon) {
+          weatherIcon.src = newUrl;
+        }
+      } else {
+        throw new Error("Failed to create new image blob");
+      }
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      this.showErrorMessage("Error fetching image. Please try again.");
+    }
   }
 
   showErrorMessage(message: string) {
