@@ -333,7 +333,7 @@ button:focus {
 
 /* Middle Alignment */
 .middle {
-  margin: 20vh 0;
+  margin: 200px 0 0;
 }
 
 @media only screen and (min-width: 500px) {
