@@ -66,6 +66,7 @@ export class GLoc {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      console.log(data);
       const weatherInfo = new WeatherInfo(this.canvasBackground);
       weatherInfo.setWeatherData(data);
     } catch (error) {
