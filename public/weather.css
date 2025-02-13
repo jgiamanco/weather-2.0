@@ -350,3 +350,7 @@ div#front-page-description h1 {
 .middle {
   margin: 25px auto 0;
 }
+
+.lightning-flash {
+  background-color: rgba(255, 255, 255, 0.7);
+}
